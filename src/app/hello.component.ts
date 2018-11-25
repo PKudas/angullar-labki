@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './hello.component.html',
+  styleUrls: ['./hello.component.css']
 })
 export class HelloComponent {
   imie = 'Jan';

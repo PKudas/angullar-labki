@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { HelloComponent } from './hello.component';
 import { ProductComponent } from './product/product.component';
+import { NaglowekComponent } from './naglowek/naglowek.component';
 
 @NgModule({
   declarations: [
     HelloComponent,
-    ProductComponent
+    ProductComponent,
+    NaglowekComponent
   ],
   imports: [
     BrowserModule,
