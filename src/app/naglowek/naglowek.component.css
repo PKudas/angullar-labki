@@ -1,0 +1,11 @@
+.jumbotron {
+    background-image: url('http://ocdn.eu/pclabpl/image/2017/12/2982.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+}
+#top {
+    padding-top: 4rem;
+    color: #FEFDFD;
+}
