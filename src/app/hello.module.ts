@@ -11,6 +11,7 @@ import { NewProduktComponent } from './new-produkt/new-produkt.component';
 import { KoszykComponent } from './koszyk/koszyk.component';
 import { HelloRoutingModule } from './/hello-routing.module';
 import { NawigacjaComponent } from './nawigacja/nawigacja.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { NawigacjaComponent } from './nawigacja/nawigacja.component';
     ProduktComponent,
     NewProduktComponent,
     KoszykComponent,
-    NawigacjaComponent
+    NawigacjaComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,

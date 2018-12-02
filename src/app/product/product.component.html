@@ -4,7 +4,9 @@
 <div class="album py-5 bg-light">
   <div class="container"> 
     <div class="row">
-      <app-produkt class="col-md-4" *ngFor="let p of products" [product]="p" [max]="max" [min] ="min" (deleted)="onDeleted($event)"></app-produkt>
+      <div class="col-12">
+      <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>
