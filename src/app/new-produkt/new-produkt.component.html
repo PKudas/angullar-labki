@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title">Nowy produkt</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  </button>
+</div>
+<form [formGroup]="myForm" (ngSubmit)="submitForm()">
+  <div class="modal-boy">
+    <div class="container">
+      <div class="form-group">
+        <label for="name">Nazwa</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+      <div class="form-group">
+        <label for="quantity">Ilość</label>
+        <input type="number" class="form-control" formControlName="quantity" />
+      </div>
+      <div class="form-group">
+        <label for="price">Cena</label>
+        <input type="number" class="form-control" formControlName="price" />
+      </div>
+      <div class="form-group">
+        <label for="description">Opis</label>
+        <input type="text" class="form-control" formControlName="description" />
+      </div>
+      <div class="form-group">
+        <label for="link">Link do zdjęcia</label>
+        <input type="text" class="form-control" formControlName="link" />
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-success" [disabled]="!myForm.valid">
+      Dodaj produkt
+    </button>
+  </div>
+</form>

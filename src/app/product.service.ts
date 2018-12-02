@@ -11,16 +11,19 @@ export class ProductService {
     return FakeProducts.products;
   }
 
-  getProduct() {
-
+  getProduct(product: Product) {
+   
   }
 
-  addProduct() {
-
+  addProduct(product: Product) {
+    FakeProducts.products.push(product);
   }
 
-  deleteProduct() {
-
+  deleteProduct(product: Product) {
+    let index = FakeProducts.products.indexOf(product);
+    if(index !== -1) {
+      FakeProducts.products.splice(index, 1);
+    }
   }
 
   constructor() { }
