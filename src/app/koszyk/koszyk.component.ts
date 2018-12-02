@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KoszykService } from '../koszyk.service';
 
 @Component({
   selector: 'app-koszyk',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class KoszykComponent implements OnInit {
 
-  constructor() { }
+  i = "";
+  constructor(private koszykService: KoszykService) { }
 
   ngOnInit() {
+    console.log("asdasd");
+    this.koszykService.productAdded.subscribe(productInfo => {
+      this.i = productInfo;
+    })
   }
 
 }
