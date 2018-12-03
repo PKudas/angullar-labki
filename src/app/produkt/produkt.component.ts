@@ -19,9 +19,8 @@ export class ProduktComponent implements OnInit {
   }
 
   addToBasket() {
-    console.log("dodano")
     this.product.quantity--
-    this.koszykService.addProduct({name: this.product.name, price: this.product.price});
+    this.koszykService.addProduct({ name: this.product.name, price: this.product.price, quantity: 1, description: this.product.description, link: this.product.link });
   }
 
   constructor(private koszykService: KoszykService) { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KoszykService } from '../koszyk.service';
+import { Product } from '../Product';
 
 @Component({
   selector: 'app-koszyk',
@@ -8,14 +9,10 @@ import { KoszykService } from '../koszyk.service';
 })
 export class KoszykComponent implements OnInit {
 
-  i = "";
+  basketContent: Product[] = [];
   constructor(private koszykService: KoszykService) { }
 
   ngOnInit() {
-    console.log("asdasd");
-    this.koszykService.productAdded.subscribe(productInfo => {
-      this.i = productInfo;
-    })
+    this.basketContent = this.koszykService.getContent();
   }
-
 }

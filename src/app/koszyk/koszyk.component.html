@@ -1,3 +1,9 @@
 <div id="koszyk">
-<p>koszyk works!</p> {{i}}   
+    <ul>
+        <li *ngFor="let product of basketContent">
+            {{product.name}}
+            {{product.quantity}}
+            {{product.price}}
+        </li>
+    </ul>
 </div>
