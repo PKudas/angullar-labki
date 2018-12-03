@@ -1,6 +1,6 @@
 <div class="card mb-4 box-shadow" [ngClass]="{'bg-danger':getColor(product.quantity), 'border-danger': (product.price == max), 'border-success': product.price == min}">
   <div class="text-center">
-    <img class="rounded-circle" data-src= {{product.link}} alt="Card image cap" width="200" height="200">
+    <img data-src= {{product.link}} alt="Card image cap">
     <h5 class="card-title">{{product.name | uppercase}} <br> {{product.price}} PLN</h5>
   </div>
   <div class="card-body">
