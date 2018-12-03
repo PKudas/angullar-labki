@@ -12,6 +12,10 @@ import { KoszykComponent } from './koszyk/koszyk.component';
 import { HelloRoutingModule } from './/hello-routing.module';
 import { NawigacjaComponent } from './nawigacja/nawigacja.component';
 import { ProductsComponent } from './products/products.component';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,14 +26,17 @@ import { ProductsComponent } from './products/products.component';
     NewProduktComponent,
     KoszykComponent,
     NawigacjaComponent,
-    ProductsComponent
+    ProductsComponent,
+    OrderConfirmationComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    HelloRoutingModule
+    HelloRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [ProductComponent],

@@ -1,4 +1,4 @@
-import { Injectable, Output, EventEmitter  } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Product } from './Product';
 
 @Injectable({
@@ -6,22 +6,30 @@ import { Product } from './Product';
 })
 export class KoszykService {
 
-  @Output() productAdded: EventEmitter<string> = new EventEmitter();
-  basketContent: Product[] = [];
-  
+  @Output() basketChanged: EventEmitter<Product[]> = new EventEmitter();
+
   constructor() { }
 
   addProduct(product: Product) {
-    let index = this.basketContent.findIndex(productValue => productValue.name == product.name);
-    if(index != -1) {
-      this.basketContent[index].quantity = this.basketContent[index].quantity + 1;
+    const storageItem = localStorage.getItem(product.name);
+    if (storageItem != null) {
+      const item = JSON.parse(storageItem);
+      localStorage.setItem(product.name, JSON.stringify({name: product.name, quantity: item.quantity + 1,
+        price: product.price, description: product.description, link: product.link}));
+    } else {
+      localStorage.setItem(product.name, JSON.stringify(product));
     }
-    else {
-      this.basketContent.push(product);
-    }
+    this.basketChanged.emit(this.getContent());
   }
 
   getContent() {
-    return this.basketContent;
+    const basketContent: Product[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      const product = JSON.parse(localStorage.getItem(key));
+      console.log(product);
+      basketContent.push(product);
+    }
+    return basketContent;
   }
 }
