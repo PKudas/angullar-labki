@@ -16,6 +16,7 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { environment } from '../environments/environment';
     KoszykComponent,
     NawigacjaComponent,
     ProductsComponent,
-    OrderConfirmationComponent
+    OrderConfirmationComponent,
+    AdminPanelComponent
   ],
   imports: [
     BrowserModule,
