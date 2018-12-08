@@ -2,9 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, enableProdMode } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { HelloComponent } from './hello.component';
-import { ProductComponent } from './product/product.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { NaglowekComponent } from './naglowek/naglowek.component';
 import { ProduktComponent } from './produkt/produkt.component';
 import { NewProduktComponent } from './new-produkt/new-produkt.component';
@@ -17,11 +18,12 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { CategorySelectorComponent } from './category-selector/category-selector.component';
 
 @NgModule({
   declarations: [
     HelloComponent,
-    ProductComponent,
+    DashboardComponent,
     NaglowekComponent,
     ProduktComponent,
     NewProduktComponent,
@@ -29,7 +31,8 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     NawigacjaComponent,
     ProductsComponent,
     OrderConfirmationComponent,
-    AdminPanelComponent
+    AdminPanelComponent,
+    CategorySelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -38,10 +41,11 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
     NgbModule.forRoot(),
     HelloRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [],
-  bootstrap: [ProductComponent],
+  bootstrap: [DashboardComponent],
   entryComponents: [
     NewProduktComponent
   ]

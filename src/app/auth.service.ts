@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from 'firebase';
 import { Observable } from 'rxjs/index';
-import firebase = require('firebase');
+import * as firebase from 'firebase';
 
 export interface Credentials {
   email: string;

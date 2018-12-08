@@ -3,6 +3,9 @@ import {Product} from '../Product';
 import {ProductService} from '../product.service';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NewProduktComponent} from '../new-produkt/new-produkt.component';
+import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { take, map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products',
@@ -12,43 +15,26 @@ import {NewProduktComponent} from '../new-produkt/new-produkt.component';
 export class ProductsComponent implements OnInit {
   @HostBinding('class.row') row = true;
 
-  min: number;
-  max: number;
-
-  products: Product[] = [];
-
-  shoppingList: Product[] = [];
+  products: Observable<Product[]>;
+  categories = [
+    {name: 'Lustrzanki', checked: false},
+    {name: 'Bezlusterkowce', checked: false},
+    {name: 'Kompaktowe', checked: false}
+  ];
 
   constructor(private productService: ProductService, private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.getProducts();
-    for (let product of this.products) {
-      if (this.min == null && this.max == null) {
-        this.min = product.price;
-        this.max = product.price;
-      }
-      if (product.price < this.min) {
-        this.min = product.price;
-      }
-      if (product.price > this.max) {
-        this.max = product.price;
-      }
-    }
+    this.products = this.productService.products;
   }
 
   openFormModal() {
     const modalRef = this.modalService.open(NewProduktComponent);
-
+//TODO implement adding
     modalRef.result.then((result) => {
-      this.productService.addProduct({ name: result.name, quantity: result.quantity, price: result.price, description: result.description, link: result.link })
     }).catch((error) => {
       console.log(error);
     });
-  }
-
-  getProducts(): void {
-    this.products = this.productService.getProducts();
   }
 
   onDeleted(product: Product) {

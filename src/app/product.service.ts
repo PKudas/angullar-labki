@@ -1,14 +1,29 @@
 import { Injectable } from '@angular/core';
-import { FakeProducts } from './FakeProducts';
 import { Product } from './Product';
+import { BehaviorSubject } from 'rxjs';
+import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  private currentCategories = new BehaviorSubject<any>(null);
+  private products$: AngularFirestoreCollection<any>;
 
-  getProducts(): Product[] {
-    return FakeProducts.products;
+  constructor(private afs: AngularFirestore) {
+    this.products$ = this.afs.collection('products');
+   }
+
+  get products() {
+    return this.products$.snapshotChanges().pipe(
+      map(products => products.map(p => {
+        const data = p.payload.doc.data() as Product;
+          console.log(data);
+          const id = p.payload.doc.id;
+          return {id, ...data};
+      }))
+    );
   }
 
   getProduct(product: Product) {
@@ -16,15 +31,8 @@ export class ProductService {
   }
 
   addProduct(product: Product) {
-    FakeProducts.products.push(product);
   }
 
   deleteProduct(product: Product) {
-    let index = FakeProducts.products.indexOf(product);
-    if(index !== -1) {
-      FakeProducts.products.splice(index, 1);
-    }
   }
-
-  constructor() { }
 }

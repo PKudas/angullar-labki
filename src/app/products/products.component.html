@@ -1,12 +1,22 @@
 <div class="col-12">
-<app-naglowek></app-naglowek>
+    <app-naglowek></app-naglowek>
 </div>
+<!-- <div>
 <button (click)="openFormModal()">Dodaj nowy produkt</button>
-<div class="col-12">
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="row">
-                <app-produkt class="col-md-4" *ngFor="let p of products" [product]="p" [max]="max" [min]="min" (deleted)="onDeleted($event)"></app-produkt>
+</div> -->
+<div class="container product-container">
+    <div class="row">
+        <div class="col-2">
+            <app-category-selector [categories]="this.categories">
+            </app-category-selector>
+        </div>
+        <div class="col-10">
+            <div class="album py-5 bg-light">
+                <div class="container">
+                    <div class="row">
+                        <app-produkt class="col-md-4" *ngFor="let p of products | async" [product]="p" (deleted)="onDeleted($event)"></app-produkt>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

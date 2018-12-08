@@ -10,8 +10,6 @@ import { KoszykService } from '../koszyk.service';
 export class ProduktComponent implements OnInit {
 
   @Input() product: Product;
-  @Input() max: number;
-  @Input() min: number;
   @Output() deleted = new EventEmitter<Product>();
 
   getColor(quantity) {
@@ -19,8 +17,10 @@ export class ProduktComponent implements OnInit {
   }
 
   addToBasket() {
-    this.product.quantity--
-    this.koszykService.addProduct({ name: this.product.name, price: this.product.price, quantity: 1, description: this.product.description, link: this.product.link });
+    this.product.quantity--;
+    this.koszykService.addProduct({ id: this.product.id, name: this.product.name, category: this.product.category,
+      price: this.product.price, quantity: 1,
+      description: this.product.description, link: this.product.link });
   }
 
   constructor(private koszykService: KoszykService) { }
