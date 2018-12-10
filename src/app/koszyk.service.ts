@@ -27,7 +27,6 @@ export class KoszykService {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       const product = JSON.parse(localStorage.getItem(key));
-      console.log(product);
       basketContent.push(product);
     }
     return basketContent;

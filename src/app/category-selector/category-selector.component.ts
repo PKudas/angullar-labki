@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ProductsFilterService } from '../products-filter.service';
 
 @Component({
   selector: 'app-category-selector',
@@ -7,11 +8,17 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CategorySelectorComponent implements OnInit {
 
-  @Input() categories = [];
+  @Input() categories;
 
-  constructor() { }
+  constructor(private productsFilterService: ProductsFilterService) { }
 
   ngOnInit() {
+  }
+
+  onChange() {
+    this.productsFilterService.selectedCategories = this.categories
+    .filter(category => category.checked)
+    .map(category => category.name);
   }
 
 }

@@ -19,6 +19,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CategorySelectorComponent } from './category-selector/category-selector.component';
+import { SearchProductComponent } from './search-product/search-product.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CategorySelectorComponent } from './category-selector/category-selector
     ProductsComponent,
     OrderConfirmationComponent,
     AdminPanelComponent,
-    CategorySelectorComponent
+    CategorySelectorComponent,
+    SearchProductComponent
   ],
   imports: [
     BrowserModule,

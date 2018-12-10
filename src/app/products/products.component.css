@@ -1,5 +1,10 @@
 @media (min-width: 1200px) {
     .product-container {
-    max-width: 1540px;
+    max-width: 1720px;
     }
+}
+
+.row {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

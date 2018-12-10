@@ -1,6 +1,6 @@
 <section class="categories-container">
   <div class="form-check" id="categories" *ngFor="let category of categories">
-    <input class="form-check-input" type="checkbox" [checked]="category.checked">
+    <input class="form-check-input" type="checkbox" [(ngModel)]="category.checked" (change)="onChange()">
     <label class="form-check-label" for="defaultCheck1">
       {{category.name}}
     </label>

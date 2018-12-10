@@ -4,6 +4,7 @@
 }
 
 .categories-container {
+    background-color: #f8f9fa;
     border: 1px solid #ebeff2;
     min-height: 120px;
     padding: 15px 20px;
