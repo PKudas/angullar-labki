@@ -10,12 +10,16 @@ export class ProductsPageComponent implements OnInit {
 
   show = false;
   pageCount;
+  currentPage;
+  last;
 
   constructor(private paginationService: PaginationService) { }
 
   ngOnInit() {
+    this.currentPage = 1;
+    this.pageCount = 1;
     this.paginationService.pageCountLoaded.subscribe(count => {
-      this.pageCount = 5;
+      this.pageCount = 1;
       this.show = true;
     });
   }
