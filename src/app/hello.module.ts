@@ -20,6 +20,8 @@ import { environment } from '../environments/environment';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import { CategorySelectorComponent } from './category-selector/category-selector.component';
 import { SearchProductComponent } from './search-product/search-product.component';
+import { ProductsPageComponent } from './products-page/products-page.component';
+import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { SearchProductComponent } from './search-product/search-product.componen
     OrderConfirmationComponent,
     AdminPanelComponent,
     CategorySelectorComponent,
-    SearchProductComponent
+    SearchProductComponent,
+    ProductsPageComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

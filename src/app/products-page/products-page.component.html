@@ -1,0 +1,9 @@
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" href="#">Poprzednia</a></li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item disabled" *ngIf="this.show ? this.pageCount > 2 : false"><a class="page-link" href="#">..</a></li>
+    <li class="page-item" *ngIf="this.show ? this.pageCount > 1 : false"><a class="page-link" href="#">{{pageCount}}</a></li>
+    <li class="page-item"><a class="page-link" href="#">Następna</a></li>
+  </ul>
+</nav>

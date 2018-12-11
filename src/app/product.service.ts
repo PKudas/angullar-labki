@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Product } from './Product';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
 import { map, switchMap, filter, take } from 'rxjs/operators';
 import { ProductsFilterService } from './products-filter.service';
@@ -11,6 +11,9 @@ import { Query } from '@firebase/firestore-types';
 })
 export class ProductService {
   private products$: AngularFirestoreCollection<any>;
+  private productsOnPage = 6;
+  private pageCountSubject: Subject<any> = new Subject();
+  private loadingDataSubject: Subject<boolean> = new Subject();
 
   constructor(private afs: AngularFirestore, private productsFilterService: ProductsFilterService) {
     //this.products$ = this.afs.collection('products');
@@ -19,7 +22,9 @@ export class ProductService {
   get products() {
     return this.productsFilterService.selectedFilters.pipe(
       switchMap(filters => {
-        return this.afs.collection('products').snapshotChanges().pipe(
+        this.loadingDataSubject.next(true);
+        return this.afs.collection('products')
+        .snapshotChanges().pipe(
           map(products => products.filter(p => {
             const data = p.payload.doc.data() as Product;
             if (!filters) { return true; }
@@ -39,9 +44,25 @@ export class ProductService {
             const id = p.payload.doc.id;
             return {id, ...data};
           })),
-          take(1)
+          map(products => {
+            this.setProductsCount(products.length);
+            this.loadingDataSubject.next(false);
+            return products.slice(0, 8);
+          })
         );
       }));
+  }
+
+  setProductsCount(value) {
+    this.pageCountSubject.next(Math.ceil(value / this.productsOnPage));
+  }
+
+  public getLoadedPageCount() {
+    return this.pageCountSubject.asObservable();
+  }
+
+  public getLoadingDataStatus() {
+    return this.loadingDataSubject.asObservable();
   }
 
   getProduct(product: Product) {
