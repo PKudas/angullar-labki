@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { ProductsFilterService } from '../products-filter.service';
 
 @Component({
   selector: 'app-search-product',
@@ -7,13 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchProductComponent implements OnInit {
 
-  constructor() { }
+  constructor(private productsFilterService: ProductsFilterService) { }
 
   ngOnInit() {
   }
 
-  onChange() {
-    console.log('chuj');
-  }
+  search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(200),
+      distinctUntilChanged(),
+      map(term => this.productsFilterService.updateSearchInput(term))
+    )
 
 }

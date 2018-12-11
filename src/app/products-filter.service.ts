@@ -6,15 +6,23 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProductsFilterService {
 
-  private currentCategories = new BehaviorSubject<any>(null);
+  private currentFilters = new BehaviorSubject<any>(null);
+  private currentCategories;
+  private currentSearchInput;
 
   constructor() { }
 
-  get selectedCategories() {
-    return this.currentCategories.asObservable();
+  get selectedFilters() {
+    return this.currentFilters.asObservable();
+  }
+
+  updateSearchInput(value) {
+    this.currentSearchInput = value;
+    this.currentFilters.next([value, this.currentCategories]);
   }
 
   set selectedCategories(value) {
-    this.currentCategories.next(value);
+    this.currentCategories = value;
+    this.currentFilters.next([this.currentSearchInput, value]);
   }
 }
