@@ -9,7 +9,7 @@ import { Product } from '../Product';
 })
 export class NawigacjaComponent implements OnInit {
 
-  basketContent: Product[] = [];
+  basketContent = [];
   productCount = 0;
   costs = 0.00;
 

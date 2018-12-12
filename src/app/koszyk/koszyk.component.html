@@ -1,4 +1,4 @@
-<div id="koszyk">
+<!-- <div id="koszyk">
     <ul>
         <li *ngFor="let product of basketContent">
             {{product.name}}
@@ -6,4 +6,51 @@
             {{product.price}}
         </li>
     </ul>
+</div> -->
+<div class="container baske basket-wrapper" id="koszyk">
+    <div id="basketItemsWrapper" class="basket-tems-wrapper">
+        <div class="basket-items-header">
+            <div class="product-header">Produkt</div>
+            <div class="price-header">Cena</div>
+            <div class="count-header pad-right">Ilość</div>
+            <div class="total-header">Razem</div>
+        </div>
+        <form id="basketItemsForm">
+            <div id="basketItems">
+                <div class="basket-item-group" *ngFor="let p of basketContent">
+                    <div class="basket-item">
+                        <div class="description-wrapper">
+                            <a class="image">
+                                <img class="img" src="{{p.link}}" width="70" height="59">                                    
+                            </a>
+                            <a class="name">{{p.name}}</a>
+                        </div>
+                        <div class="price-wrapper">
+                            <span class="price text-nowrap">{{p.price}} zł</span>
+                            <br>
+                        </div>
+                        <div class="count-wrapper">
+                            <input type='button' value='-' class='qtyminus' field='quantity' (click)=decProduct(p) [disabled]="p.quantity == 1"/>
+                            <input type='text' name='quantity' value='{{p.quantity}}' class='qty' />
+                            <input type='button' value='+' class='qtyplus' field='quantity' (click)=incProduct(p) [disabled]="p.quantity == p.max" />
+                        </div>
+                        <div class="totalprice-wrapper">
+                            <span class="price text-nowrap">
+                                <span class="overallprice">{{p.quantity * p.price}} zł</span>
+                            </span>
+                        </div>
+                        <input type='button' value='X' class="deleteBt" (click)=removeProducts(p)/>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="total-basket-price pull-right">
+            <span>Wartość zakupów: </span>
+            <span>{{basketPrice}} zł</span>
+        </div>
+        <div class="confirm">
+            <button type="button" class="btn btn-success" [routerLink]="['']">Wróć do zakupów</button>  
+            <button type="button" class="btn btn-success" (click)="openFormModal()" [disabled]="basketContent.length === 0">Złóż zamówienie</button>
+        </div>
+    </div>
 </div>

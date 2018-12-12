@@ -72,8 +72,8 @@ export class ProductService {
     return this.loadingDataSubject.asObservable();
   }
 
-  getProduct(product: Product) {
-
+  getProduct(id) {
+    return this.afs.collection('products').doc(id).get();
   }
 
   addProduct(product: Product) {

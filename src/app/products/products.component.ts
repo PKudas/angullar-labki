@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { take, map, filter } from 'rxjs/operators';
 import { delay } from 'q';
 import { PaginationService } from '../pagination.service';
+import { KoszykService } from '../koszyk.service';
 
 @Component({
   selector: 'app-products',
@@ -27,15 +28,24 @@ export class ProductsComponent implements OnInit {
     { name: 'Kompaktowe', checked: false }
   ];
 
-  constructor(private productService: ProductService, private modalService: NgbModal, private paginationService: PaginationService) { }
+  constructor(private productService: ProductService, private modalService: NgbModal,
+    private paginationService: PaginationService, private koszykService: KoszykService) { }
 
   ngOnInit() {
     this.productService.getLoadingDataStatus().subscribe(s => {
-      console.log(s);
       this.loading = s;
     });
     this.productsObservable = this.productService.products;
-    this.productsObservable.subscribe(p => this.products = p);
+    this.productsObservable.subscribe(p => {
+      this.products = p;
+      this.koszykService.getContent().forEach(prod => {
+        const id = prod.id;
+        const index = this.products.findIndex(v => v.id === id);
+        if (index > -1) {
+          this.products[index].quantity = this.products[index].quantity - prod.quantity;
+        }
+      });
+    });
     this.productService.getLoadedPageCount().subscribe(value => this.paginationService.loaded(value));
   }
 

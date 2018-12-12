@@ -10,20 +10,43 @@ export class KoszykService {
 
   constructor() { }
 
-  addProduct(product: Product) {
-    const storageItem = localStorage.getItem(product.name);
+  emptyBasket() {
+    localStorage.clear();
+    this.basketChanged.emit(this.getContent());
+  }
+
+  addProduct(product) {
+    const storageItem = localStorage.getItem(product.id);
     if (storageItem != null) {
       const item = JSON.parse(storageItem);
-      localStorage.setItem(product.name, JSON.stringify({name: product.name, quantity: item.quantity + 1,
-        price: product.price, description: product.description, link: product.link}));
+      localStorage.setItem(product.id, JSON.stringify({id: product.id, name: product.name, quantity: item.quantity + 1,
+        price: product.price, description: product.description, link: product.link, max: product.max}));
     } else {
-      localStorage.setItem(product.name, JSON.stringify(product));
+      localStorage.setItem(product.id, JSON.stringify({id: product.id, name: product.name, quantity: 1,
+        price: product.price, description: product.description, link: product.link, max: product.max}));
     }
     this.basketChanged.emit(this.getContent());
   }
 
+  deleteProduct(product) {
+    const storageItem = localStorage.getItem(product.id);
+    const item = JSON.parse(storageItem);
+    item.quantity = item.quantity - 1;
+    localStorage.setItem(product.id, JSON.stringify(item));
+    this.basketChanged.emit(this.getContent());
+  }
+
+  removeGivenProducts(product) {
+    localStorage.removeItem(product.id);
+    this.basketChanged.emit(this.getContent());
+  }
+
+  updateProductInBasket(product) {
+    localStorage.setItem(product.id, JSON.stringify(product));
+  }
+
   getContent() {
-    const basketContent: Product[] = [];
+    const basketContent = [];
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       const product = JSON.parse(localStorage.getItem(key));

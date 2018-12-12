@@ -18,6 +18,13 @@ export class ProductsPageComponent implements OnInit {
   ngOnInit() {
     this.currentPage = this.productsFilterService.selectedPage;
     this.paginationService.pageCountLoaded.subscribe(count => {
+      if (this.currentPage > count) {
+        if (count > 0) {
+          this.first();
+        } else {
+          this.currentPage = 1;
+        }
+      }
       this.pageCount = count;
       this.show = true;
     });
