@@ -11,6 +11,7 @@ import { Query } from '@firebase/firestore-types';
 })
 export class ProductService {
   private products$: AngularFirestoreCollection<any>;
+  private currentPage = 1;
   private productsOnPage = 6;
   private pageCountSubject: Subject<any> = new Subject();
   private loadingDataSubject: Subject<boolean> = new Subject();
@@ -28,14 +29,14 @@ export class ProductService {
           map(products => products.filter(p => {
             const data = p.payload.doc.data() as Product;
             if (!filters) { return true; }
-            const [_, categories] = filters;
+            const [_, categories, m] = filters;
             if (!categories || categories.length < 1) { return true; }
             return categories.includes(data.category);
           })),
           map(products => products.filter(p => {
             const data = p.payload.doc.data() as Product;
             if (!filters) { return true; }
-            const [searchInput, _] = filters;
+            const [searchInput, _, m] = filters;
             if (!searchInput) { return true; }
             return data.name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1;
           })),
@@ -46,11 +47,17 @@ export class ProductService {
           })),
           map(products => {
             this.setProductsCount(products.length);
+            const [_, m, currentPage] = filters;
             this.loadingDataSubject.next(false);
-            return products.slice(0, 8);
+            return products.slice((currentPage - 1) * this.productsOnPage, currentPage * this.productsOnPage);
           })
         );
       }));
+  }
+
+  pageChanged(pageNumber) {
+    console.log("chuj");
+    this.currentPage = pageNumber;
   }
 
   setProductsCount(value) {

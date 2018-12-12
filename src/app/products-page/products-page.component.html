@@ -1,9 +1,11 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item" [ngClass]="{'disabled':this.currentPage == 1}"><a class="page-link" href="#">Poprzednia</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item disabled" *ngIf="this.show ? this.pageCount > 2 : false"><a class="page-link" href="#">..</a></li>
-    <li class="page-item" *ngIf="this.show ? this.pageCount > 1 : false"><a class="page-link" href="#">{{pageCount}}</a></li>
-    <li class="page-item" [ngClass]="{'disabled':this.currentPage - 1 == this.pageCount}"><a class="page-link" href="#">Następna</a></li>
+    <li class="page-item" [ngClass]="{'disabled':this.currentPage == 1}"><a class="page-link" (click)="previous()">Poprzednia</a></li>
+    <li class="page-item" *ngIf="this.show ? this.currentPage > 1 : false"><a class="page-link" (click)="first()">1</a></li>
+    <li class="page-item disabled" *ngIf="this.show ? this.currentPage > 2 : false"><a class="page-link">..</a></li>
+    <li class="page-item active"><a class="page-link">{{this.currentPage}}</a></li>
+    <li class="page-item disabled" *ngIf="this.show ? showSecDots() : false"><a class="page-link">..</a></li>
+    <li class="page-item" *ngIf="this.show ? showLast() : false"><a class="page-link" (click)="last()">{{pageCount}}</a></li>
+    <li class="page-item" [ngClass]="{'disabled':this.currentPage == this.pageCount}"><a class="page-link" (click)="next()">Następna</a></li>
   </ul>
 </nav>

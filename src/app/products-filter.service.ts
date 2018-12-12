@@ -6,9 +6,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ProductsFilterService {
 
-  private currentFilters = new BehaviorSubject<any>(null);
+  private currentFilters = new BehaviorSubject<any>([null, null, 1]);
   private currentCategories;
   private currentSearchInput;
+  private currentPage = 1;
 
   constructor() { }
 
@@ -16,13 +17,22 @@ export class ProductsFilterService {
     return this.currentFilters.asObservable();
   }
 
+  updateCurrentPage(value) {
+    this.currentPage = value;
+    this.currentFilters.next([this.currentSearchInput, this.currentCategories, value]);
+  }
+
   updateSearchInput(value) {
     this.currentSearchInput = value;
-    this.currentFilters.next([value, this.currentCategories]);
+    this.currentFilters.next([value, this.currentCategories, this.currentPage]);
   }
 
   set selectedCategories(value) {
     this.currentCategories = value;
-    this.currentFilters.next([this.currentSearchInput, value]);
+    this.currentFilters.next([this.currentSearchInput, value, this.currentPage]);
+  }
+
+  get selectedPage() {
+    return this.currentPage;
   }
 }
