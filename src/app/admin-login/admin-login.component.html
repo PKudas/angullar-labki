@@ -1,0 +1,19 @@
+<div class="container">
+  <h1 class="form-heading">login Form</h1>
+  <div class="login-form">
+    <div class="main-div">
+      <div class="panel">
+        <h2>Admin Panel</h2>
+        <p>Wprowadź email i hasło</p>
+      </div>
+      <form id="Login" [formGroup]="myForm" (ngSubmit)="submitForm()">
+        <div class="form-group">
+          <input type="email" class="form-control" formControlName="email" placeholder="Adres email">
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="password" placeholder="Hasło">
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Login</button>
+
+      </form>
+</div>

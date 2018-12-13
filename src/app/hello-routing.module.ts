@@ -4,6 +4,8 @@ import { KoszykComponent } from './koszyk/koszyk.component';
 import { ProductsComponent } from './products/products.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AuthGuard } from './authguard.service';
 
 const routes: Routes = [
   {
@@ -16,7 +18,12 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminPanelComponent
+    component: AdminPanelComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'admin/login',
+    component: AdminLoginComponent
   }
 ];
 

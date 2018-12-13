@@ -1,0 +1,19 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-md fixed-top">
+  <a [routerLink]="['']" class="navbar-brand">Paradox</a>
+  <button type="button" class="navbar-toggler navbar-toggler-right" data- toggle="collapse" data-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto" id="navScrollspy">
+      <li class="nav-item">
+        <a class="nav-link"  [routerLink]="['/admin']">Zamówienia</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"  [routerLink]="['/produkty']">Edycja produktów</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link"  [routerLink]="logout()">Wyloguj</a>
+      </li>
+    </ul>
+  </div>
+</nav>

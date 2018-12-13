@@ -22,6 +22,9 @@ import { CategorySelectorComponent } from './category-selector/category-selector
 import { SearchProductComponent } from './search-product/search-product.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminNavComponent } from './admin-nav/admin-nav.component';
+import { EditProductsComponent } from './edit-products/edit-products.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,10 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     CategorySelectorComponent,
     SearchProductComponent,
     ProductsPageComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AdminLoginComponent,
+    AdminNavComponent,
+    EditProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
   providers: [],
   bootstrap: [DashboardComponent],
   entryComponents: [
-    NewProduktComponent
+    NewProduktComponent,
+    OrderConfirmationComponent
   ]
 })
 export class HelloModule { }

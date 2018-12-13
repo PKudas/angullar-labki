@@ -5,7 +5,6 @@ import { ProductService } from '../product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OrderConfirmationComponent } from '../order-confirmation/order-confirmation.component';
 import { OrderService } from '../order.service';
-
 @Component({
   selector: 'app-koszyk',
   templateUrl: './koszyk.component.html',

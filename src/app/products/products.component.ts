@@ -9,7 +9,6 @@ import { take, map, filter } from 'rxjs/operators';
 import { delay } from 'q';
 import { PaginationService } from '../pagination.service';
 import { KoszykService } from '../koszyk.service';
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
