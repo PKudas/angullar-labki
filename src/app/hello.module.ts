@@ -25,6 +25,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { EditProductsComponent } from './edit-products/edit-products.component';
+import { RoleAtuthenticationComponent } from './role-atuthentication/role-atuthentication.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { EditProductsComponent } from './edit-products/edit-products.component';
     LoadingSpinnerComponent,
     AdminLoginComponent,
     AdminNavComponent,
-    EditProductsComponent
+    EditProductsComponent,
+    RoleAtuthenticationComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { EditProductsComponent } from './edit-products/edit-products.component';
   bootstrap: [DashboardComponent],
   entryComponents: [
     NewProduktComponent,
-    OrderConfirmationComponent
+    OrderConfirmationComponent,
+    RoleAtuthenticationComponent
   ]
 })
 export class HelloModule { }

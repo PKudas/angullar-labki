@@ -56,7 +56,6 @@ export class ProductService {
   }
 
   pageChanged(pageNumber) {
-    console.log("chuj");
     this.currentPage = pageNumber;
   }
 

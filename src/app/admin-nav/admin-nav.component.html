@@ -8,11 +8,11 @@
       <li class="nav-item">
         <a class="nav-link"  [routerLink]="['/admin']">Zamówienia</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link"  [routerLink]="['/produkty']">Edycja produktów</a>
+      <li class="nav-item" *ngIf="authService.userRole$ | async as userRole">
+        <a class="nav-link"  [routerLink]="['/admin/produkty']" *ngIf="check(userRole)">Edycja produktów</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link"  [routerLink]="logout()">Wyloguj</a>
+        <button class="btn btn-secondary" type="button" (click)="logout()">Wyloguj</button>
       </li>
     </ul>
   </div>

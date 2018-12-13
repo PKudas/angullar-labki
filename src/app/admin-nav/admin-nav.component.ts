@@ -11,12 +11,15 @@ export class AdminNavComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  check(v) {
+    return v.role === 'admin';
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['login']);
+    this.router.navigate(['/admin/login']);
   }
 
 }
