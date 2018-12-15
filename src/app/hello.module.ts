@@ -17,7 +17,7 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
-import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { CategorySelectorComponent } from './category-selector/category-selector.component';
 import { SearchProductComponent } from './search-product/search-product.component';
 import { ProductsPageComponent } from './products-page/products-page.component';
@@ -26,6 +26,15 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { AdminNavComponent } from './admin-nav/admin-nav.component';
 import { EditProductsComponent } from './edit-products/edit-products.component';
 import { RoleAtuthenticationComponent } from './role-atuthentication/role-atuthentication.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatExpansionModule } from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { AdminProductsComponent } from './admin-products/admin-products.component';
+import { AmdinPanelComponent } from './amdin-panel/amdin-panel.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +47,7 @@ import { RoleAtuthenticationComponent } from './role-atuthentication/role-atuthe
     NawigacjaComponent,
     ProductsComponent,
     OrderConfirmationComponent,
-    AdminPanelComponent,
+    AdminOrdersComponent,
     CategorySelectorComponent,
     SearchProductComponent,
     ProductsPageComponent,
@@ -46,24 +55,34 @@ import { RoleAtuthenticationComponent } from './role-atuthentication/role-atuthe
     AdminLoginComponent,
     AdminNavComponent,
     EditProductsComponent,
-    RoleAtuthenticationComponent
+    RoleAtuthenticationComponent,
+    AdminProductsComponent,
+    AmdinPanelComponent,
+    EditProductComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
     HelloRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [DashboardComponent],
   entryComponents: [
     NewProduktComponent,
     OrderConfirmationComponent,
-    RoleAtuthenticationComponent
+    RoleAtuthenticationComponent,
+    EditProductComponent
   ]
 })
 export class HelloModule { }

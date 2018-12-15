@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">Nowy produkt</h4>
+  <h4 class="modal-title">Edytuj produkt</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
   </button>
 </div>
@@ -8,31 +8,31 @@
     <div class="container">
       <div class="form-group">
         <label for="name">Nazwa</label>
-        <input type="text" class="form-control" formControlName="name"/>
+        <input type="text" class="form-control" formControlName="name" [(ngModel)]="product.name"/>
       </div>
       <div class="form-group">
         <label for="quantity">Ilość</label>
-        <input type="number" class="form-control" formControlName="quantity" />
+        <input type="number" class="form-control" formControlName="quantity" [(ngModel)]="product.quantity"/>
       </div>
       <div class="form-group">
         <label for="category">Kategoria</label>
-        <input type="text" class="form-control" formControlName="category" />
+        <input type="text" class="form-control" formControlName="category" [(ngModel)]="product.category"/>
       </div>
       <div class="form-group">
         <label for="price">Cena</label>
-        <input type="number" class="form-control" formControlName="price" />
+        <input type="number" class="form-control" formControlName="price" [(ngModel)]="product.price"/>
       </div>
       <div class="form-group">
         <label for="description">Opis</label>
-        <input type="text" class="form-control" formControlName="description" />
+        <input type="text" class="form-control" formControlName="description" [(ngModel)]="product.description"/>
       </div>
       <div class="form-group">
         <label for="link">Link do zdjęcia</label>
-        <input type="text" class="form-control" formControlName="link" />
+        <input type="text" class="form-control" formControlName="link" [(ngModel)]="product.link"/>
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button mat-raised-button color="primary" [disabled]="!myForm.valid">Dodaj produkt</button>
+    <button mat-raised-button color="primary" [disabled]="!myForm.valid">Potwierdź</button>
   </div>
 </form>

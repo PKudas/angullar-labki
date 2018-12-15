@@ -1,0 +1,155 @@
+#zamowienia {
+    padding-top: 60px;
+  }
+  @media (max-width: 979px) {
+    #koszyk {
+      padding-top: 60px;
+    }
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  font-size: 95%;
+}
+
+.basket-items-wrapper {
+  display: table;
+  position: relative;
+  width: 100%;
+}
+
+.basket-items-header {
+    border-bottom: 1px solid #d6dae3;
+    color: #1d1d1e;
+    display: table;
+    font-size: .9em;
+    margin: 20px 0 0;
+    padding: 0 0 5px 5px;
+    width: 100%;
+}
+
+.product-header {
+  width: 43%;
+  display: table-cell;
+}
+
+.price-header {
+  width: 12%;
+  display: table-cell;
+  text-align: right;
+}
+
+.pad-right {
+  padding-right: 45px;
+}
+
+.count-header {
+  width: 20%;
+  display: table-cell;
+  text-align: right;
+}
+
+.total-header {
+  width: 22%;
+  display: table-cell;
+  text-align: right;
+}
+
+.basket-item-group {
+  border-bottom: 1px solid #d6dae3;
+}
+
+.basket-item {
+  color: #1d1d1e;
+  display: table;
+  font-size: 14px;
+  height: 3em;
+  padding: 5px 0;
+  position: relative;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.description-wrapper {
+  width: 45%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.image {
+  display: inline-block;
+  max-height: 65px;
+  max-width: 85px;
+  vertical-align: middle;
+  text-align: center;
+  padding-right: 15px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.name {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.price-wrapper {
+  width: 12%;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: right;
+}
+
+.price {
+  text-align: right;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.count-wrapper {
+  display: table-cell;
+  min-width: 25px;
+  text-align: right;
+  vertical-align: middle;
+  width: 20%;
+}
+
+.totalprice-wrapper {
+  position: relative;
+  text-align: right;
+  vertical-align: middle;
+  width: 100%;
+  display: table-cell;
+}
+
+.total-basket-price {
+  color: #1d1d1e;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 1em;
+  text-align: right;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+#ord {
+  font-size: 130%;
+}
+
+#conf {
+  text-align: center;
+  vertical-align: middle;
+}

@@ -1,15 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-new-produkt',
-  templateUrl: './new-produkt.component.html',
-  styleUrls: ['./new-produkt.component.css']
+  selector: 'app-edit-product',
+  templateUrl: './edit-product.component.html',
+  styleUrls: ['./edit-product.component.css']
 })
-export class NewProduktComponent implements OnInit {
+export class EditProductComponent implements OnInit {
 
   myForm: FormGroup;
+  @Input() product;
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder) {
     this.createForm();
@@ -48,5 +49,6 @@ export class NewProduktComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
 }

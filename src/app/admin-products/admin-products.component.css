@@ -1,0 +1,17 @@
+#cont {
+    padding-top: 60px;
+}
+@media (max-width: 979px) {
+  #koszyk {
+    padding-top: 60px;
+  }
+}
+
+.row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.mat-raised-button {
+  font-size: 18px;
+}

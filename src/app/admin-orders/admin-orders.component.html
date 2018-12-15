@@ -1,0 +1,52 @@
+<app-admin-nav></app-admin-nav>
+<div class="container" id="zamowienia">
+  <h1 class="text-center">Zamówienia</h1>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel *ngFor="let o of orders | async">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{o.name}}
+        </mat-panel-title>
+        <mat-panel-description>
+          {{o.address}}
+          <span class="badge badge-warning" *ngIf="o.status">Oczekujące</span>
+          <span class="badge badge-success" *ngIf="!o.status">Zrealizowane</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="basket-items-header">
+          <div class="product-header">Produkt</div>
+          <div class="price-header">Cena</div>
+          <div class="count-header pad-right">Ilość</div>
+          <div class="total-header">Razem</div>
+      </div>
+      <form id="basketItemsForm">
+          <div id="basketItems">
+              <div class="basket-item-group" *ngFor="let i of o.items">
+                  <div class="basket-item">
+                      <div class="description-wrapper">
+                          <a class="image">
+                              <img class="img" src="{{i.link}}" width="70" height="59">                                    
+                          </a>
+                          <a class="name">{{i.name}}</a>
+                      </div>
+                      <div class="price-wrapper">
+                          <span class="price text-nowrap">{{i.price}} zł</span>
+                          <br>
+                      </div>
+                      <div class="count-wrapper">
+                          {{i.quantity}}
+                      </div>
+                      <div class="totalprice-wrapper">
+                          <span class="price text-nowrap">
+                              <span class="overallprice">{{i.quantity * i.price}} zł</span>
+                          </span>
+                      </div>
+                  </div>
+              </div>
+              <p class="text-right" id="ord"><b>Wartość zamówienia: </b>{{calc(o.items)}}</p>
+              <div id="conf" *ngIf="o.status"><button type="button" class="btn btn-success" (click)="confirm(o.id, o.items)">Zatwierdź</button></div>              
+          </div>
+      </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

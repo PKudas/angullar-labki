@@ -1,11 +1,10 @@
-<app-nawigacja></app-nawigacja>
-<div class="col-12">
-    <app-naglowek></app-naglowek>
-</div>
-<!-- <div>
-<button (click)="openFormModal()">Dodaj nowy produkt</button>
-</div> -->
-<div class="container product-container">
+<app-admin-nav></app-admin-nav>
+<div class="container product-container" id="cont">
+    <div class="row">
+        <div class="col-2">
+            <button mat-raised-button color="primary" (click)="openFormModal()">Dodaj nowy produkt</button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <app-search-product></app-search-product>
@@ -23,7 +22,7 @@
             <div class="album py-5 bg-light">
                 <div class="container">
                     <div class="row">
-                        <app-produkt class="col-md-4" *ngFor="let p of products" [product]="p" [admin]="admin" (deleted)="onDeleted($event)"></app-produkt>
+                        <app-produkt class="col-md-4" *ngFor="let p of products" [product]="p" [admin]="this.admin" (deleted)="onDeleted($event)"></app-produkt>
                     </div>
                 </div>
             </div>

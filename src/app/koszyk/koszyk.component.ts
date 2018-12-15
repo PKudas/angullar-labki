@@ -26,7 +26,7 @@ export class KoszykComponent implements OnInit {
     const modalRef = this.modalService.open(OrderConfirmationComponent);
     modalRef.result.then((result) => {
       const items = [];
-      this.basketContent.forEach(p => items.push(p.id));
+      this.basketContent.forEach(p => items.push({id: p.id, name: p.name, link: p.link, price: p.price, quantity: p.quantity}));
       this.orderService.addOrder({status: true, name: result.name, address: result.address, items: items, price: this.basketPrice});
       this.koszykService.emptyBasket();
       this.basketContent = [];

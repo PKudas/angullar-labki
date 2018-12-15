@@ -76,8 +76,23 @@ export class ProductService {
   }
 
   addProduct(product: Product) {
+    this.afs.collection('products').add(product);
   }
 
-  deleteProduct(product: Product) {
+  deleteProduct(id) {
+    this.afs.collection('products').doc(id).delete();
+  }
+
+  updateProductCount(id, count) {
+    this.afs.collection('products').doc(id).get().subscribe(p => {
+      const prod = p.data();
+      const q = prod.quantity;
+      this.afs.collection('products').doc(id).update({ quantity: q - count});
+    });
+  }
+
+  updateProduct(product) {
+    const {id, ...data} = product;
+    this.afs.collection('products').doc(id).set(data);
   }
 }

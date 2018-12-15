@@ -15,20 +15,20 @@ export interface Credentials {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  readonly userRole$: Observable<any>;
+  readonly userRole$: Observable<any> = this.fireAuth.authState.pipe(
+    switchMap(user => {
+      if (user) {
+        return this.afs.collection('roles').doc(user.email).valueChanges();
+      } else {
+        console.log(of(null));
+        return of(null);
+      }
+    })
+  );
 
   readonly authState$: Observable<any | null> = this.fireAuth.authState;
 
   constructor(private fireAuth: AngularFireAuth, private afs: AngularFirestore) {
-    this.userRole$ = this.fireAuth.authState.pipe(
-      switchMap(user => {
-        if (user) {
-          return this.afs.collection('roles').doc(user.email).valueChanges();
-        } else {
-          of(null);
-        }
-      })
-    );
   }
 
   get user(): any | null {
