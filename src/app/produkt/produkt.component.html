@@ -1,6 +1,6 @@
 <div class="card mb-4 box-shadow">
   <div class="text-center">
-    <img data-src= {{product.link}} alt="Card image cap">
+    <img id="img" data-src= {{product.link}} alt="Card image cap" (click)="showDetails()">
     <h5 class="card-title">{{product.name | uppercase}} <br> {{product.price}} PLN</h5>
   </div>
   <div class="card-body">

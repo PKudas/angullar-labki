@@ -39,4 +39,8 @@ export class ProduktComponent implements OnInit {
       console.log(error);
     });
   }
+
+  showDetails() {
+    console.log("AAAAxxxz");
+  }
 }
