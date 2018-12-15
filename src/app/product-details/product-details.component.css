@@ -1,0 +1,24 @@
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+  }
+  
+  #count {
+    width: 30px;
+    margin-right: 8px;
+  }
+
+  #bsk {
+    font-size: 17px;
+  }
+
+  .il {
+    margin-right: 4px;
+    color: rgb(117, 117, 117);
+  }
+
+  .price {
+    text-align: right;
+    font-size: 180%;
+  }

@@ -19,10 +19,10 @@ export class KoszykService {
     const storageItem = localStorage.getItem(product.id);
     if (storageItem != null) {
       const item = JSON.parse(storageItem);
-      localStorage.setItem(product.id, JSON.stringify({id: product.id, name: product.name, quantity: item.quantity + 1,
+      localStorage.setItem(product.id, JSON.stringify({id: product.id, name: product.name, quantity: item.quantity + product.quantity,
         price: product.price, description: product.description, link: product.link, max: product.max}));
     } else {
-      localStorage.setItem(product.id, JSON.stringify({id: product.id, name: product.name, quantity: 1,
+      localStorage.setItem(product.id, JSON.stringify({id: product.id, name: product.name, quantity: product.quantity,
         price: product.price, description: product.description, link: product.link, max: product.max}));
     }
     this.basketChanged.emit(this.getContent());

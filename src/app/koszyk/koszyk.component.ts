@@ -36,7 +36,8 @@ export class KoszykComponent implements OnInit {
     });
   }
   incProduct(product) {
-    this.koszykService.addProduct(product);
+    this.koszykService.addProduct({id: product.id, name: product.name, quantity: 1,
+      price: product.price, description: product.description, link: product.link, max: product.max});
     product.quantity = product.quantity + 1;
     this.basketPrice = this.basketPrice + product.price;
   }

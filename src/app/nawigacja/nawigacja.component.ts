@@ -32,6 +32,7 @@ export class NawigacjaComponent implements OnInit {
     for (const product of this.basketContent) {
       costs = costs + (product.quantity * product.price);
       quantity = quantity + product.quantity;
+      console.log(quantity);
     }
     this.costs = costs;
     this.productCount = quantity;

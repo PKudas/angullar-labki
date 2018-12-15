@@ -35,6 +35,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     RoleAtuthenticationComponent,
     AdminProductsComponent,
     AmdinPanelComponent,
-    EditProductComponent
+    EditProductComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,8 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     NewProduktComponent,
     OrderConfirmationComponent,
     RoleAtuthenticationComponent,
-    EditProductComponent
+    EditProductComponent,
+    ProductDetailsComponent
   ]
 })
 export class HelloModule { }

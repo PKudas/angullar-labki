@@ -4,6 +4,7 @@ import { KoszykService } from '../koszyk.service';
 import { ProductService } from '../product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EditProductComponent } from '../edit-product/edit-product.component';
+import { ProductDetailsComponent } from '../product-details/product-details.component';
 
 @Component({
   selector: 'app-produkt',
@@ -41,6 +42,7 @@ export class ProduktComponent implements OnInit {
   }
 
   showDetails() {
-    console.log("AAAAxxxz");
+    const modalRef = this.modalService.open(ProductDetailsComponent, { size: 'lg' });
+    modalRef.componentInstance.product = this.product;
   }
 }
