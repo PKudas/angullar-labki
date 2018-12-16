@@ -1,3 +1,6 @@
+import { NodeProductService } from "src/app/node-product.service";
+import { ProductService } from "src/app/product.service";
+
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build ---prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
@@ -12,6 +15,10 @@ export const environment = {
     storageBucket: "zpwsklep.appspot.com",
     messagingSenderId: "89074703930"
   }
+};
+
+export const dataSource = {
+  source: ProductService
 };
 
 /*

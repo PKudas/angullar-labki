@@ -36,6 +36,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [DashboardComponent],
