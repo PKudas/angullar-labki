@@ -80,6 +80,7 @@ router.put('/products/:id', (req, res) => {
 })
 
 router.patch('/products/:id', (req, res) => {
+    console.log('PATCH', req.body);
     ProductModel.findByIdAndUpdate(req.params.id, { $set: req.body }, {
         new: true
     })
@@ -94,7 +95,11 @@ router.patch('/products/:id', (req, res) => {
 router.get('/products/:id', (req, res) => {
     ProductModel.findById(req.params.id)
         .then(doc => {
-            res.json(doc)
+            if (!doc) {
+                res.status(404).send('Not Found');
+            } else {
+                res.json(doc)
+            }
         })
         .catch(err => {
             res.status(500).json(doc)

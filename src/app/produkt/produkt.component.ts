@@ -10,6 +10,7 @@ import * as socketIo from 'socket.io-client';
 import { Observable } from 'rxjs';
 import { PromotionService } from '../promotion.service';
 import { PromotionComponent } from '../promotion/promotion.component';
+import { PromotionGetterService } from '../promotion-getter.service';
 
 @Component({
   selector: 'app-produkt',
@@ -35,17 +36,32 @@ export class ProduktComponent implements OnInit {
   }
 
   constructor(private koszykService: KoszykService, private productService: NodeProductService,
-     private modalService: NgbModal, private promotionService: PromotionService) {
+     private modalService: NgbModal, private promotionService: PromotionService, private promotionGetterService: PromotionGetterService) {
    }
 
   ngOnInit() {
     this.oldPrice = this.product.price;
+    console.log('polaczono z websocketem...');
+    this.promotionGetterService.getPromotion(this.product._id).subscribe((prom: any) => {
+      console.log(prom);
+      this.product.price = prom.newPrice;
+      this.newPrice = prom.newPrice;
+      this.oldPrice = prom.oldPrice;
+      this.activePromotion = true;
+    }, error => {
+      console.log('Promotion not found');
+    });
     this.promotionService.promotion.subscribe(data => {
       if (data._id === this.product._id) {
-        console.log(data);
+        if (data.active) {
         this.product.price = data.newPrice;
         this.newPrice = data.newPrice;
         this.activePromotion = true;
+        } else {
+          this.product.price = data.oldPrice;
+          this.newPrice = null;
+          this.activePromotion = false;
+        }
       }
     });
   }
@@ -68,7 +84,8 @@ export class ProduktComponent implements OnInit {
   addPromotion() {
     const modalRef = this.modalService.open(PromotionComponent, { size: 'lg' });
     modalRef.result.then((result) => {
-      this.socket.emit('promotion', {_id: this.product._id, newPrice: result.newPrice, length: result.length });
+      this.socket.emit('promotion', {_id: this.product._id, newPrice: result.newPrice, oldPrice: this.product.price,
+         length: result.length });
     });
   }
 }

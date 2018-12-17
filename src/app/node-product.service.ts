@@ -11,7 +11,6 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class NodeProductService {
-  private products$: AngularFirestoreCollection<any>;
   private currentPage = 1;
   private productsOnPage = 6;
   private pageCountSubject: Subject<any> = new Subject();

@@ -1,5 +1,5 @@
 <div class="card mb-4 box-shadow">
-    <button mat-raised-button id="prom" color="primary" *ngIf="true" (click)="addPromotion()">Dodaj promocję</button>
+    <button mat-raised-button id="prom" color="primary" *ngIf="admin" [disabled]="this.activePromotion" (click)="addPromotion()">Dodaj promocję</button>
   <div class="text-center">
     <img id="img" data-src= {{product.link}} alt="Card image cap" (click)="showDetails()">
     <h5 class="card-title">{{product.name | uppercase}} <br> 

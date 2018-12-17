@@ -15,6 +15,7 @@ export class PromotionService {
   }
 
   addPromotion(prom) {
+    console.log(prom);
     this.promotion.next(prom);
   }
 }

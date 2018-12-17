@@ -11,6 +11,8 @@ import { PaginationService } from '../pagination.service';
 import { KoszykService } from '../koszyk.service';
 import { NodeProductService } from '../node-product.service';
 import { ProductsFilterService } from '../products-filter.service';
+import * as socketIo from 'socket.io-client';
+import { PromotionService } from '../promotion.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -24,6 +26,7 @@ export class AdminProductsComponent implements OnInit {
   productsObservable: Observable<any>;
   loading: boolean;
   currentFilters = this.productFilterService.selectedFilters;
+  socket = socketIo('http://localhost:3000');
 
   categories = [
     { name: 'Lustrzanki', checked: false },
@@ -32,7 +35,8 @@ export class AdminProductsComponent implements OnInit {
   ];
 
   constructor(private productService: NodeProductService, private modalService: NgbModal,
-    private paginationService: PaginationService, private productFilterService: ProductsFilterService) { }
+    private paginationService: PaginationService, private productFilterService: ProductsFilterService,
+  private promotionService: PromotionService) { }
 
   ngOnInit() {
     this.productService.getLoadingDataStatus().subscribe(s => {
@@ -43,6 +47,9 @@ export class AdminProductsComponent implements OnInit {
         this.products = p.docs;
         this.paginationService.loaded(p.pages);
       });
+    });
+    this.socket.on('receive-promotion', (data) => {
+      this.promotionService.addPromotion(data);
     });
     // this.productService.getLoadedPageCount().subscribe(value => this.paginationService.loaded(value));
   }
