@@ -32,7 +32,7 @@ export class ProductDetailsComponent implements OnInit {
     const q = +this.orderedCount;
     this.product.quantity = this.product.quantity - q;
     this.koszykService.addProduct({
-      id: this.product.id, name: this.product.name, category: this.product.category,
+      _id: this.product._id, name: this.product.name, category: this.product.category,
       price: this.product.price, quantity: q,
       description: this.product.description, link: this.product.link, max: this.product.quantity + q
     });

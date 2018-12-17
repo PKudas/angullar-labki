@@ -37,6 +37,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PromotionComponent } from './promotion/promotion.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdminProductsComponent,
     AmdinPanelComponent,
     EditProductComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    PromotionComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +81,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [DashboardComponent],
@@ -87,7 +91,8 @@ import { HttpClientModule } from '@angular/common/http';
     OrderConfirmationComponent,
     RoleAtuthenticationComponent,
     EditProductComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    PromotionComponent
   ]
 })
 export class HelloModule { }

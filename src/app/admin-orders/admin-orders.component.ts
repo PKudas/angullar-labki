@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { OrderService } from '../order.service';
+import { NodeOrderService } from '../node-order.service';
 
 @Component({
   selector: 'app-admin-orders',
@@ -12,7 +13,7 @@ export class AdminOrdersComponent implements OnInit {
   panelOpenState = false;
   orders;
 
-  constructor(private authService: AuthService, private orderService: OrderService) { }
+  constructor(private authService: AuthService, private orderService: NodeOrderService) { }
 
   ngOnInit() {
     this.orders = this.orderService.orders;
@@ -24,8 +25,8 @@ export class AdminOrdersComponent implements OnInit {
     return price;
   }
 
-  confirm(id, items) {
-    this.orderService.confirmOrder(id, items);
+  confirm(_id, items) {
+    this.orderService.confirmOrder(_id, items);
   }
 
 }

@@ -10,3 +10,15 @@
 #img {
     cursor: pointer;
 }
+
+#prom {
+    margin-bottom: 8px;
+}
+
+.strikethrough {
+    text-decoration: line-through !important;
+}
+
+.promotion {
+    color: green;
+}

@@ -15,8 +15,10 @@ export class NodeProductService {
   private currentPage = 1;
   private productsOnPage = 6;
   private pageCountSubject: Subject<any> = new Subject();
-  const endpoint = 'http://localhost:3000/';
-  const httpOptions = {
+  private loadingDataSubject: Subject<boolean> = new Subject();
+
+  endpoint = 'http://localhost:3000/';
+  httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
@@ -30,9 +32,33 @@ export class NodeProductService {
     return body || {};
   }
 
-  get products() {
-    return this.http.get(this.endpoint + 'products').pipe(
-      map(this.extractData)
+  getProducts(filters) {
+    this.loadingDataSubject.next(true);
+    const [searchInput, categories, page] = filters;
+    const queryParams = [];
+    if (page !== 1) { queryParams.push(['page', page]); }
+    if (categories && categories.length > 0) {
+      categories.forEach(c => queryParams.push(['category', c]));
+    }
+    if (searchInput) {
+      queryParams.push(['name', searchInput]);
+    }
+    let query = '';
+    if (queryParams.length > 0) {
+      const [paramKey, paramValue] = queryParams[0];
+      query = '?' + paramKey + '=' + paramValue;
+    }
+    if (queryParams.length > 1) {
+      for (let i = 1; i < queryParams.length; i++) {
+        const [paramKey, paramValue] = queryParams[i];
+        query = query + '&' + paramKey + '=' + paramValue;
+      }
+    }
+    return this.http.get(this.endpoint + 'products' + query).pipe(
+      map(res => {
+        this.loadingDataSubject.next(false);
+        return this.extractData(res as Response);
+      })
     );
   }
 
@@ -61,31 +87,31 @@ export class NodeProductService {
   addProduct(product: Product) {
     console.log(product);
     return this.http.post<any>(this.endpoint + 'products', JSON.stringify(product), this.httpOptions).pipe(
-      tap((product) => console.log(`added product w/ id=${product.id}`)),
+      tap((product) => console.log(`added product w/ id=${product._id}`)),
       catchError(this.handleError<any>('addProduct'))
-    );
+    ).subscribe(resp => console.log(resp));
   }
 
   deleteProduct(id) {
     return this.http.delete<any>(this.endpoint + 'products/' + id, this.httpOptions).pipe(
       tap(_ => console.log(`deleted product id=${id}`)),
       catchError(this.handleError<any>('deleteProduct'))
-    );
+    ).subscribe(resp => console.log(resp));
   }
 
   updateProductCount(id, count) {
     return this.http.patch(this.endpoint + 'products/' + id, JSON.stringify({quantity: count}), this.httpOptions).pipe(
       tap(_ => console.log(`patched product id=${id}`)),
       catchError(this.handleError<any>('patchProduct'))
-    );
+    ).subscribe(resp => console.log(resp));
   }
 
   updateProduct(product) {
-    const {id, productBody} = product;
-    return this.http.put(this.endpoint + 'products/' + id, JSON.stringify(productBody), this.httpOptions).pipe(
-      tap(_ => console.log(`updated product id=${id}`)),
+    const {_id, ...productBody} = product;
+    return this.http.put(this.endpoint + 'products/' + _id, productBody, this.httpOptions).pipe(
+      tap(_ => console.log(`updated product id=${_id}`)),
       catchError(this.handleError<any>('updateProduct'))
-    );
+    ).subscribe(resp => console.log(resp));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {

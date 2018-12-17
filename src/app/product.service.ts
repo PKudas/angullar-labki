@@ -42,8 +42,8 @@ export class ProductService {
           })),
           map(products => products.map(p => {
             const data = p.payload.doc.data() as Product;
-            const id = p.payload.doc.id;
-            return {id, ...data};
+            const _id = p.payload.doc.id;
+            return {_id, ...data};
           })),
           map(products => {
             this.setProductsCount(products.length);
@@ -71,28 +71,28 @@ export class ProductService {
     return this.loadingDataSubject.asObservable();
   }
 
-  getProduct(id) {
-    return this.afs.collection('products').doc(id).get();
+  getProduct(_id) {
+    return this.afs.collection('products').doc(_id).get();
   }
 
   addProduct(product: Product) {
     this.afs.collection('products').add(product);
   }
 
-  deleteProduct(id) {
-    this.afs.collection('products').doc(id).delete();
+  deleteProduct(_id) {
+    this.afs.collection('products').doc(_id).delete();
   }
 
-  updateProductCount(id, count) {
-    this.afs.collection('products').doc(id).get().subscribe(p => {
+  updateProductCount(_id, count) {
+    this.afs.collection('products').doc(_id).get().subscribe(p => {
       const prod = p.data();
       const q = prod.quantity;
-      this.afs.collection('products').doc(id).update({ quantity: q - count});
+      this.afs.collection('products').doc(_id).update({ quantity: q - count});
     });
   }
 
   updateProduct(product) {
-    const {id, ...data} = product;
-    this.afs.collection('products').doc(id).set(data);
+    const {_id, ...data} = product;
+    this.afs.collection('products').doc(_id).set(data);
   }
 }

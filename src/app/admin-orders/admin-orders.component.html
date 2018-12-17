@@ -43,8 +43,8 @@
                       </div>
                   </div>
               </div>
-              <p class="text-right" id="ord"><b>Wartość zamówienia: </b>{{calc(o.items)}}</p>
-              <div id="conf" *ngIf="o.status"><button type="button" class="btn btn-success" (click)="confirm(o.id, o.items)">Zatwierdź</button></div>              
+              <p class="text-right" id="ord"><b>Wartość zamówienia: </b>{{calc(o.items)}} zł</p>
+              <div id="conf" *ngIf="o.status"><button type="button" class="btn btn-success" (click)="confirm(o._id, o.items)">Zatwierdź</button></div>              
           </div>
       </form>
     </mat-expansion-panel>

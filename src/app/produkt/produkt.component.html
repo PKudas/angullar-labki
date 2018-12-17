@@ -1,7 +1,10 @@
 <div class="card mb-4 box-shadow">
+    <button mat-raised-button id="prom" color="primary" *ngIf="true" (click)="addPromotion()">Dodaj promocję</button>
   <div class="text-center">
     <img id="img" data-src= {{product.link}} alt="Card image cap" (click)="showDetails()">
-    <h5 class="card-title">{{product.name | uppercase}} <br> {{product.price}} PLN</h5>
+    <h5 class="card-title">{{product.name | uppercase}} <br> 
+      <a [ngClass]="{'strikethrough':newPrice}">{{oldPrice}}</a>
+      <a class="promotion" *ngIf="newPrice"> {{newPrice}}</a> PLN</h5>
   </div>
   <div class="card-body">
     <div class="d-flex justify-content-between align-items-center">
@@ -10,7 +13,7 @@
               <mat-icon aria-label="Example icon-button with">add_shopping_cart</mat-icon>
             </button>
         <div id="del" *ngIf="admin">
-            <button mat-raised-button color="warn" (click)="this.productService.deleteProduct(product.id)">Usuń produkt
+            <button mat-raised-button color="warn" (click)="this.productService.deleteProduct(product._id)">Usuń produkt
               </button>
               <button mat-button color="primary" (click)="editProduct()">Edytuj</button>
         </div>

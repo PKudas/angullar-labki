@@ -9,6 +9,11 @@ import { take, map, filter } from 'rxjs/operators';
 import { delay } from 'q';
 import { PaginationService } from '../pagination.service';
 import { KoszykService } from '../koszyk.service';
+import { NodeProductService } from '../node-product.service';
+import { ProductsFilterService } from '../products-filter.service';
+import * as socketIo from 'socket.io-client';
+import { PromotionService } from '../promotion.service';
+
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -19,8 +24,10 @@ export class ProductsComponent implements OnInit {
 
   admin = false;
   products: Product[];
-  productsObservable: Observable<Product[]>;
+  productsObservable: Observable<any>;
   loading: boolean;
+  currentFilters = this.productFilterService.selectedFilters;
+  socket = socketIo('http://localhost:3000');
 
   categories = [
     { name: 'Lustrzanki', checked: false },
@@ -28,24 +35,30 @@ export class ProductsComponent implements OnInit {
     { name: 'Kompaktowe', checked: false }
   ];
 
-  constructor(private productService: ProductService, private modalService: NgbModal,
-    private paginationService: PaginationService, private koszykService: KoszykService) { }
+  constructor(private productService: NodeProductService, private modalService: NgbModal,
+    private paginationService: PaginationService, private koszykService: KoszykService,
+    private productFilterService: ProductsFilterService, private promotionService: PromotionService) { }
 
   ngOnInit() {
     this.productService.getLoadingDataStatus().subscribe(s => {
       this.loading = s;
     });
-    this.productsObservable = this.productService.products;
-    this.productsObservable.subscribe(p => {
-      this.products = p;
-      this.koszykService.getContent().forEach(prod => {
-        const id = prod.id;
-        const index = this.products.findIndex(v => v.id === id);
-        if (index > -1) {
-          this.products[index].quantity = this.products[index].quantity - prod.quantity;
-        }
+    this.currentFilters.subscribe(filters => {
+      this.productService.getProducts(filters).subscribe((p: any) => {
+        this.products = p.docs;
+        this.paginationService.loaded(p.pages);
+        this.koszykService.getContent().forEach(prod => {
+          const _id = prod._id;
+          const index = this.products.findIndex(v => v._id === _id);
+          if (index > -1) {
+            this.products[index].quantity = this.products[index].quantity - prod.quantity;
+          }
+        });
       });
     });
-    this.productService.getLoadedPageCount().subscribe(value => this.paginationService.loaded(value));
+    this.socket.on('receive-promotion', (data) => {
+      this.promotionService.addPromotion(data);
+    });
+    //this.productService.getLoadedPageCount().subscribe(value => this.paginationService.loaded(value));
   }
 }

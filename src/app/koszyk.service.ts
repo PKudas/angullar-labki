@@ -16,33 +16,33 @@ export class KoszykService {
   }
 
   addProduct(product) {
-    const storageItem = localStorage.getItem(product.id);
+    const storageItem = localStorage.getItem(product._id);
     if (storageItem != null) {
       const item = JSON.parse(storageItem);
-      localStorage.setItem(product.id, JSON.stringify({id: product.id, name: product.name, quantity: item.quantity + product.quantity,
+      localStorage.setItem(product._id, JSON.stringify({_id: product._id, name: product.name, quantity: item.quantity + product.quantity,
         price: product.price, description: product.description, link: product.link, max: product.max}));
     } else {
-      localStorage.setItem(product.id, JSON.stringify({id: product.id, name: product.name, quantity: product.quantity,
+      localStorage.setItem(product._id, JSON.stringify({_id: product._id, name: product.name, quantity: product.quantity,
         price: product.price, description: product.description, link: product.link, max: product.max}));
     }
     this.basketChanged.emit(this.getContent());
   }
 
   deleteProduct(product) {
-    const storageItem = localStorage.getItem(product.id);
+    const storageItem = localStorage.getItem(product._id);
     const item = JSON.parse(storageItem);
     item.quantity = item.quantity - 1;
-    localStorage.setItem(product.id, JSON.stringify(item));
+    localStorage.setItem(product._id, JSON.stringify(item));
     this.basketChanged.emit(this.getContent());
   }
 
   removeGivenProducts(product) {
-    localStorage.removeItem(product.id);
+    localStorage.removeItem(product._id);
     this.basketChanged.emit(this.getContent());
   }
 
   updateProductInBasket(product) {
-    localStorage.setItem(product.id, JSON.stringify(product));
+    localStorage.setItem(product._id, JSON.stringify(product));
   }
 
   getContent() {

@@ -9,6 +9,8 @@ import { take, map, filter } from 'rxjs/operators';
 import { delay } from 'q';
 import { PaginationService } from '../pagination.service';
 import { KoszykService } from '../koszyk.service';
+import { NodeProductService } from '../node-product.service';
+import { ProductsFilterService } from '../products-filter.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -19,8 +21,9 @@ export class AdminProductsComponent implements OnInit {
 
   admin = true;
   products: Product[];
-  productsObservable: Observable<Product[]>;
+  productsObservable: Observable<any>;
   loading: boolean;
+  currentFilters = this.productFilterService.selectedFilters;
 
   categories = [
     { name: 'Lustrzanki', checked: false },
@@ -28,23 +31,24 @@ export class AdminProductsComponent implements OnInit {
     { name: 'Kompaktowe', checked: false }
   ];
 
-  constructor(private productService: ProductService, private modalService: NgbModal,
-    private paginationService: PaginationService) { }
+  constructor(private productService: NodeProductService, private modalService: NgbModal,
+    private paginationService: PaginationService, private productFilterService: ProductsFilterService) { }
 
   ngOnInit() {
     this.productService.getLoadingDataStatus().subscribe(s => {
       this.loading = s;
     });
-    this.productsObservable = this.productService.products;
-    this.productsObservable.subscribe(p => {
-      this.products = p;
+    this.currentFilters.subscribe(filters => {
+      this.productService.getProducts(filters).subscribe((p: any) => {
+        this.products = p.docs;
+        this.paginationService.loaded(p.pages);
+      });
     });
-    this.productService.getLoadedPageCount().subscribe(value => this.paginationService.loaded(value));
+    // this.productService.getLoadedPageCount().subscribe(value => this.paginationService.loaded(value));
   }
 
   openFormModal() {
     const modalRef = this.modalService.open(NewProduktComponent);
-    modalRef.componentInstance.test = 'hahhaha';
     modalRef.result.then((result) => {
       this.productService.addProduct(result);
     }).catch((error) => {
