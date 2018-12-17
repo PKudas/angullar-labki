@@ -12,18 +12,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-2">
+        <div class="col-6 col-md-2">
             <app-category-selector [categories]="this.categories">
             </app-category-selector>
         </div>
-        <div class="col-10" *ngIf="loading">
+        <div class="col-6 col-md-10" *ngIf="loading">
             <app-loading-spinner></app-loading-spinner>
         </div>
-        <div class="col-10" *ngIf="!loading">
+        <div class="col-6 col-md-10" *ngIf="!loading">
             <div class="album py-5 bg-light">
                 <div class="container">
                     <div class="row">
-                        <app-produkt class="col-md-4" *ngFor="let p of products" [product]="p" [admin]="admin" (deleted)="onDeleted($event)"></app-produkt>
+                        <app-produkt class="col-12 col-md-6 col-xl-4" *ngFor="let p of products" [product]="p" [admin]="admin" (deleted)="onDeleted($event)"></app-produkt>
                     </div>
                 </div>
             </div>
