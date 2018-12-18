@@ -43,15 +43,11 @@ io.on('connection', function (socket) {
         console.error(error)
         return
       }
-      console.log(`statusCode: ${res.statusCode}`)
-      console.log(body)
     });
     let timer = data.length * 60000;
     setTimeout(function () {
-      console.log(timer);
       PromotionModel.findByIdAndDelete(data._id)
         .then(doc => {
-          console.log(doc);
           io.emit('receive-promotion', { active: false, ...data });
           request.patch('http://localhost:3000/products/' + data._id, {
             json: {
@@ -62,8 +58,6 @@ io.on('connection', function (socket) {
               console.error(error)
               return
             }
-            console.log(`statusCode: ${res.statusCode}`)
-            console.log(body)
           });
         });
     }, timer)
